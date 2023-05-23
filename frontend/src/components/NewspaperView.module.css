@@ -1,0 +1,11 @@
+.tagline {
+  font-size: 32px;
+  font-weight: 700;
+  color: #bf252a;
+}
+
+.viewSection {
+  width: 100%;
+  height: 400px;
+  background-color: #d9d9d9;
+}
