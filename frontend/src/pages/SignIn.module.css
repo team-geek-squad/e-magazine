@@ -54,12 +54,21 @@
   margin-top: 10px;
 }
 
+
 .checkDiv {
   width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-top: 10px;
+}
+
+.checkInnerDiv{
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .checkBox{

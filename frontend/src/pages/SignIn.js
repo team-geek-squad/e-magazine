@@ -23,8 +23,10 @@ const SignIn = () => {
           />
         </div>
         <div className={classes.checkDiv}>
-          <input type="checkbox" value="" className={classes.checkBox} />
-          <p className={classes.label}>Remember Me</p>
+          <div className={classes.checkInnerDiv}>
+            <input type="checkbox" value="" className={classes.checkBox} />
+            <p className={classes.label}>Remember Me</p>
+          </div>
         </div>
         <button className={classes.btn}>
           <p className={classes.btnText}>Login</p>
