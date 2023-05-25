@@ -4,20 +4,26 @@ const SignIn = () => {
   return (
     <div className={classes.page}>
       <div className={classes.centerDiv}>
-        <h2 className={classes.signIn}>Sign In</h2>
-        <p>Sign in and start managing your magazine</p>
-        <input
-          type="text"
-          className={classes.userName}
-          placeholder="User Name"
-        />
-        <input
-          type="password"
-          className={classes.password}
-          placeholder="Password"
-        />
+        <h2 className={classes.signIn}>Sign in</h2>
+        <p className={classes.tagline}>
+          Sign in and start managing your magazine
+        </p>
         <div className={classes.inputDiv}>
-          <input type="checkbox" value="" />
+          <input
+            type="text"
+            className={classes.userName}
+            placeholder="User Name"
+          />
+        </div>
+        <div className={classes.inputDiv}>
+          <input
+            type="password"
+            className={classes.password}
+            placeholder="Password"
+          />
+        </div>
+        <div className={classes.checkDiv}>
+          <input type="checkbox" value="" className={classes.checkBox} />
           <p className={classes.label}>Remember Me</p>
         </div>
         <button className={classes.btn}>
