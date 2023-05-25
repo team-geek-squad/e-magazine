@@ -11,11 +11,11 @@
   font-weight: 500;
 }
 
-.footerTopRight {
+/* .footerTopRight {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .btn {
   width: 150px;
@@ -33,6 +33,10 @@
   font-weight: 600;
 }
 
+.bottomRow{
+  font-size: 14px;
+}
+
 .logo {
   height: 50px;
   margin-bottom: 10px;
@@ -41,6 +45,7 @@
 .contactUsTitle {
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .callUsOn {
@@ -72,4 +77,5 @@
 .socialMedia {
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 0;
+  margin-top: 10px;
 }
