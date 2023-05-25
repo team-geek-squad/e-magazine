@@ -14,7 +14,7 @@ const Home = () => {
         <HorizontalAd />
         <NewspaperView />
         <YoutubeVideoSection />
-        <PreviousEditionsSection />
+        {/* <PreviousEditionsSection /> */}
         <HorizontalAd />
         <ThreeAdSection />
       </div>

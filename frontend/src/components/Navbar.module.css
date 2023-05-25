@@ -2,7 +2,11 @@
   width: 100%;
   height: 70px;
   padding: 10px;
-  background-image: linear-gradient(#431415de, #a82a2dde);
+  background-image: linear-gradient(
+    180deg,
+    rgba(115, 110, 110, 0.87) 0%,
+    rgba(75, 65, 65, 0.87) 100%
+  );
   display: flex;
   justify-content: center;
   align-items: center;
