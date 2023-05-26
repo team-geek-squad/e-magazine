@@ -12,6 +12,8 @@ const NewspaperView = () => {
           <div className={classes.demoPage}>Page 2</div>
           <div className={classes.demoPage}>Page 3</div>
           <div className={classes.demoPage}>Page 4</div>
+          <div className={classes.demoPage}>Page 5</div>
+          <div className={classes.demoPage}>Page 6</div>
         </HTMLFlipBook>
       </div>
     </div>
