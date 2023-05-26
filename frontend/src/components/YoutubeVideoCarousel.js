@@ -17,8 +17,24 @@ const YoutubeVideoCarousel = () => {
     // speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 770,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
-  
+
   return (
     <div className="carouselContainer container">
       <div className="controls">
@@ -36,10 +52,10 @@ const YoutubeVideoCarousel = () => {
         </span>
       </div>
       <Slider ref={setSliderRef} {...settings}>
-        <YoutubeVideos />
-        <YoutubeVideos />
-        <YoutubeVideos />
-        <YoutubeVideos />
+        <YoutubeVideos embedId="q0mbKsKG-ng" />
+        <YoutubeVideos embedId="PmIpYS59hQg" />
+        <YoutubeVideos embedId="xWmw6MyEnB8" />
+        <YoutubeVideos embedId="r6HTCiPwJr8" />
       </Slider>
     </div>
   );
