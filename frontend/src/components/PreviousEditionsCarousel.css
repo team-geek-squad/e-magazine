@@ -1,5 +1,5 @@
 .carouselContainer {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
   position: relative;
 }
 
@@ -29,8 +29,4 @@
   width: 100px;
   margin: 0 auto;
   background-color: #d9d9d9;
-}
-
-.slick-dots{
-  bottom: -40px;
 }

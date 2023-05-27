@@ -5,6 +5,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 import "./PreviousEditionsCarousel.css";
 
+import React, { useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import "./PreviousEditionsCarousel.css";
+
 const PreviousEditionsCarousel = () => {
   const [sliderRef, setSliderRef] = useState(null);
 
@@ -15,22 +22,6 @@ const PreviousEditionsCarousel = () => {
     // speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 770,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 1000,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   return (
