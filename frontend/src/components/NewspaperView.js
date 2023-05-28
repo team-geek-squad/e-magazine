@@ -19,64 +19,35 @@ const NewspaperView = () => {
   const [magazineData, setmagazineData] = useState(null);
   const [pageNumbers, setpageNumbers] = useState([]);
 
+  const fetchPDF = async (magazine) => {
+    const pdfResponce = await axios.get(magazine.downloadURL, {responseType: 'arraybuffer'});
+    setPdfData(pdfResponce);  
+  }
 
   useEffect(() => {
     const fetchData = async () => {
-      axios.get('http://localhost:8080/magazine/get-latest')
-      .then(response => {
-        setmagazineData(response.data);
+      const response = await axios.get('http://localhost:8080/magazine/get-latest');
+      setmagazineData(response.data);
+      console.log(magazineData);
 
-        const fetchPDF = async () => {
-          const pdfResponce = await axios.get(magazineData.downloadURL, {responseType: 'arraybuffer'});
-          setPdfData(pdfResponce);  
-        }
-    
-        if (magazineData) {
-          fetchPDF();
-        }
+      const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
+      setpageNumbers(pageIds);
 
-        const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
-        setpageNumbers(pageIds);
-        
-      })
-      .catch(error => {
-        console.log('Error fetching PDF:', error);
-      });
+      return response.data;
     }
 
-    fetchData();
+    
+
+      fetchData().then(res => {
+        console.log(res);
+        fetchPDF(res);
+      });
     
   }, []);
 
-  // useEffect(() => {
-  //   const fetchPDF = async () => {
-  //     const pdfResponce = await axios.get(magazineData.downloadURL, {responseType: 'arraybuffer'});
-  //     // const pdfBlob = new Blob([pdfResponce.data], {type: 'application/pdf'});
-  //     // const pdfDataUrl = URL.createObjectURL(pdfBlob);
-  //     // setPdfData(pdfDataUrl);
-  //     setPdfData(pdfResponce);
-
-
-  //   }
-
-  //   if (magazineData) {
-  //     fetchPDF();
-  //     // const pdfResponce = await axios.get(magazineData.downloadURL, {responseType: 'arraybuffer'});
-  //     // const pdfBlob = new Blob([pdfResponce.data], {type: 'application/pdf'});
-  //     // const pdfDataUrl = URL.createObjectURL(pdfBlob);
-  //     // setPdfData(pdfDataUrl);
-  //   }
-
-  //   const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
-  //   setpageNumbers(pageIds);
-
-  // }, [magazineData])
-
-
-
-  const handleDocumentLoadSuccess = ({ pages }) => {
-    console.log('Number of pages:', pages);
-    setNumPages(pages);
+  const handleDocumentLoadSuccess = ({ numPages }) => {
+    console.log('Number of pages:', numPages);
+    setNumPages(numPages);
 
   };
 
@@ -88,35 +59,24 @@ const NewspaperView = () => {
           <Document
             file={pdfData}
             onLoadSuccess={handleDocumentLoadSuccess}
+            
             >
               <HTMLFlipBook width={300} height={400}>
-              <Page pageNumber={1} />
-              <Page pageNumber={2} />
-              <Page pageNumber={3} />
-              <Page pageNumber={4} />
-              <Page pageNumber={5} />
-              <Page pageNumber={6} />
-              <Page pageNumber={7} />
-
-                {/* {pageNumbers.map(page => (
-                  <Page key={page} pageNumber={page} />
+              {/* {pageNumbers.map(page => (
+                <div key={page} className={classes.demoPage}><Page pageNumber={page} renderTextLayer={false}/></div>
                 ))} */}
+                <div className={classes.demoPage}><Page pageNumber={1} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={2} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={3} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={4} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={5} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={6} renderTextLayer={false}/></div>
+
+
+                
               </HTMLFlipBook>
             </Document>
         ) : "Loading..."}
-      {/* <Document file={samplePDF}>
-        <HTMLFlipBook width={300} height={400}>
-          <Page pageNumber={1} />
-        </HTMLFlipBook>
-      </Document> */}
-        {/* <HTMLFlipBook width={300} height={400}>
-          <div className={classes.demoPage}>Page 1</div>
-          <div className={classes.demoPage}>Page 2</div>
-          <div className={classes.demoPage}>Page 3</div>
-          <div className={classes.demoPage}>Page 4</div>
-          <div className={classes.demoPage}>Page 5</div>
-          <div className={classes.demoPage}>Page 6</div>
-        </HTMLFlipBook> */}
       </div>
     </div>
   );
