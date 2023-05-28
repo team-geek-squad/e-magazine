@@ -10,7 +10,7 @@ import { useState , useEffect} from "react";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
-import Page from "../assets/page.jpg";
+// import Page from "../assets/page.jpg";
 
 const NewspaperView = () => {
 
@@ -21,33 +21,56 @@ const NewspaperView = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8080/magazine/get-latest')
+    const fetchData = async () => {
+      axios.get('http://localhost:8080/magazine/get-latest')
       .then(response => {
         setmagazineData(response.data);
 
+        const fetchPDF = async () => {
+          const pdfResponce = await axios.get(magazineData.downloadURL, {responseType: 'arraybuffer'});
+          setPdfData(pdfResponce);  
+        }
+    
+        if (magazineData) {
+          fetchPDF();
+        }
+
+        const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
+        setpageNumbers(pageIds);
+        
       })
       .catch(error => {
         console.log('Error fetching PDF:', error);
       });
+    }
+
+    fetchData();
+    
   }, []);
 
-  useEffect(() => {
-    const fetchPDF = async () => {
-      const pdfResponce = await axios.get(magazineData.downloadURL, {responseType: 'arraybuffer'});
-      const pdfBlob = new Blob([pdfResponce.data], {type: 'application/pdf'});
-      const pdfDataUrl = URL.createObjectURL(pdfBlob);
-      setPdfData(pdfDataUrl);
+  // useEffect(() => {
+  //   const fetchPDF = async () => {
+  //     const pdfResponce = await axios.get(magazineData.downloadURL, {responseType: 'arraybuffer'});
+  //     // const pdfBlob = new Blob([pdfResponce.data], {type: 'application/pdf'});
+  //     // const pdfDataUrl = URL.createObjectURL(pdfBlob);
+  //     // setPdfData(pdfDataUrl);
+  //     setPdfData(pdfResponce);
 
-    }
 
-    if (magazineData != null) {
-      fetchPDF();
-    }
+  //   }
 
-    const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
-    setpageNumbers(pageIds);
+  //   if (magazineData) {
+  //     fetchPDF();
+  //     // const pdfResponce = await axios.get(magazineData.downloadURL, {responseType: 'arraybuffer'});
+  //     // const pdfBlob = new Blob([pdfResponce.data], {type: 'application/pdf'});
+  //     // const pdfDataUrl = URL.createObjectURL(pdfBlob);
+  //     // setPdfData(pdfDataUrl);
+  //   }
 
-  }, [magazineData])
+  //   const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
+  //   setpageNumbers(pageIds);
+
+  // }, [magazineData])
 
 
 
@@ -67,10 +90,17 @@ const NewspaperView = () => {
             onLoadSuccess={handleDocumentLoadSuccess}
             >
               <HTMLFlipBook width={300} height={400}>
+              <Page pageNumber={1} />
+              <Page pageNumber={2} />
+              <Page pageNumber={3} />
+              <Page pageNumber={4} />
+              <Page pageNumber={5} />
+              <Page pageNumber={6} />
+              <Page pageNumber={7} />
 
-                {pageNumbers.map(page => (
+                {/* {pageNumbers.map(page => (
                   <Page key={page} pageNumber={page} />
-                ))}
+                ))} */}
               </HTMLFlipBook>
             </Document>
         ) : "Loading..."}
