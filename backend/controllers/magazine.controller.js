@@ -31,7 +31,7 @@ const getLatest = async (req, res) => {
   try {
     const magazines = await Magazine.find({}).sort({ createdAt: -1 }).limit(1);
   
-    res.status(200).json(vehicles);
+    res.status(200).json(magazines[0]);
   } catch (err) {
     console.log(err);
   }
@@ -41,7 +41,7 @@ const getOldVersions = async (req, res) => {
   try {
     const magazines = await Magazine.find({}).sort({ createdAt: -1 }).skip(1);
   
-    res.status(200).json(vehicles);
+    res.status(200).json(magazines);
   } catch (err) {
     console.log(err);
   }

@@ -8,12 +8,12 @@ const multer = require("multer");
 
 
 router.get(
-    'get-latest',
+    '/get-latest',
     getLatest
 );
 
 router.get(
-    'get-old-versions',
+    '/get-old-versions',
     getOldVersions
 );
 
