@@ -22,8 +22,8 @@ app.use((req, res, next) => {
 
 // setup middlewares
 app.use(cors());
-app.use(express.json({limit: "50mb", extended:true}));
-app.use(express.urlencoded({limit: "50mb", extended:true}));
+app.use(express.json({limit: "150mb", extended:true}));
+app.use(express.urlencoded({limit: "150mb", extended:true}));
 
 passport.use(passportConfig.localStrategy);
 passport.use(passportConfig.jwtStrategy);

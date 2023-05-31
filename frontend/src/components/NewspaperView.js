@@ -32,6 +32,7 @@ const NewspaperView = () => {
 
       const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
       setpageNumbers(pageIds);
+      console.log(pageNumbers);
 
       return response.data;
     }
@@ -61,16 +62,16 @@ const NewspaperView = () => {
             onLoadSuccess={handleDocumentLoadSuccess}
             
             >
-              <HTMLFlipBook width={300} height={400}>
-              {/* {pageNumbers.map(page => (
-                <div key={page} className={classes.demoPage}><Page pageNumber={page} renderTextLayer={false}/></div>
+              <HTMLFlipBook width={500} height={650} showCover={true} autoSize={true}>
+              {/* {pageNumbers && pageNumbers.map(page => (
+                <div key={page} className={classes.demoPage}><Page pageNumber={page} width={500} renderTextLayer={false}/></div>
                 ))} */}
-                <div className={classes.demoPage}><Page pageNumber={1} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={2} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={3} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={4} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={5} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={6} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={1} width={500} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={2} width={500} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={3} width={500} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={4} width={500} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={5} width={500} renderTextLayer={false}/></div>
+                <div className={classes.demoPage}><Page pageNumber={6} width={500} renderTextLayer={false}/></div>
 
 
                 
