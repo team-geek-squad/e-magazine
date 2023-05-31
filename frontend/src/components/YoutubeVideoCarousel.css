@@ -1,5 +1,5 @@
 .carouselContainer {
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   position: relative;
 }
 
@@ -15,8 +15,4 @@
   top: 50%;
   right: 0;
   cursor: pointer;
-}
-
-.slick-dots {
-  bottom: -50px;
 }
