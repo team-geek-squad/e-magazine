@@ -5,7 +5,7 @@ import axios from "axios"
 
 
 import classes from "./NewspaperView.module.css";
-import { useState , useEffect} from "react";
+import { useState , useEffect, useRef} from "react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -17,7 +17,11 @@ const NewspaperView = () => {
   const [numPages, setNumPages] = useState(null);
   const [pdfData, setPdfData] = useState(null);
   const [magazineData, setmagazineData] = useState(null);
-  const [pageNumbers, setpageNumbers] = useState([]);
+  // const [pageNumbers, setpageNumbers] = useState([]);
+  const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
+
+
+  const flipbook = useRef();
 
   const fetchPDF = async (magazine) => {
     const pdfResponce = await axios.get(magazine.downloadURL, {responseType: 'arraybuffer'});
@@ -30,9 +34,8 @@ const NewspaperView = () => {
       setmagazineData(response.data);
       console.log(magazineData);
 
-      const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map(i => i + 1);
-      setpageNumbers(pageIds);
-      console.log(pageNumbers);
+      // setpageNumbers(pageIds);
+      // console.log(pageNumbers);
 
       return response.data;
     }
@@ -55,30 +58,32 @@ const NewspaperView = () => {
   return (
     <div>
       <p className={classes.tagline}>Read the latest Rathnadeepa Online</p>
-      <div className={classes.viewSection}>
         {pdfData ? (
-          <Document
-            file={pdfData}
-            onLoadSuccess={handleDocumentLoadSuccess}
-            
-            >
-              <HTMLFlipBook width={500} height={650} showCover={true} autoSize={true}>
-              {/* {pageNumbers && pageNumbers.map(page => (
-                <div key={page} className={classes.demoPage}><Page pageNumber={page} width={500} renderTextLayer={false}/></div>
-                ))} */}
-                <div className={classes.demoPage}><Page pageNumber={1} width={500} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={2} width={500} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={3} width={500} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={4} width={500} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={5} width={500} renderTextLayer={false}/></div>
-                <div className={classes.demoPage}><Page pageNumber={6} width={500} renderTextLayer={false}/></div>
+          <div className={classes.viewSection}>
+            <button onClick={() => flipbook.current.pageFlip().flipPrev()}>{"<"}</button>
+            <Document
+              file={pdfData}
+              onLoadSuccess={handleDocumentLoadSuccess}
+              
+              >
+                <HTMLFlipBook 
+                  className={classes.book}
+                  width={500} 
+                  ref={flipbook}
+                  height={700} 
+                  showCover={true} 
+                  autoSize={true}>
+                  {pageIds && pageIds.map(page => (
+                    <div key={page} className={classes.demoPage}>
+                      <Page pageNumber={page} width={500} renderTextLayer={false}/>
+                    </div>
+                  ))}                  
+                </HTMLFlipBook>
+              </Document>
+              <button onClick={() => flipbook.current.pageFlip().flipNext()}>{">"}</button>
 
-
-                
-              </HTMLFlipBook>
-            </Document>
+            </div>
         ) : "Loading..."}
-      </div>
     </div>
   );
 };
