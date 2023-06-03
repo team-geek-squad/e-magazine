@@ -76,6 +76,7 @@ const NewspaperView = () => {
                       height={700}
                       showCover={true}
                       autoSize={true}
+                      useMouseEvents={false}
                     >
                       {pageIds &&
                         pageIds.map((page) => (
