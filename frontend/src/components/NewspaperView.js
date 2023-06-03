@@ -5,6 +5,7 @@ import axios from "axios";
 
 import classes from "./NewspaperView.module.css";
 import { useState, useEffect, useRef } from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -56,53 +57,64 @@ const NewspaperView = () => {
       <p className={classes.tagline}>Read the latest Rathnadeepa Online</p>
       {pdfData ? (
         <div className={classes.viewSection}>
-          <Document file={pdfData} onLoadSuccess={handleDocumentLoadSuccess}>
-            <HTMLFlipBook
-              className={classes.book}
-              width={500}
-              ref={flipbook}
-              height={700}
-              showCover={true}
-              autoSize={true}
-            >
-              {pageIds &&
-                pageIds.map((page) => (
-                  <div key={page} className={classes.demoPage}>
-                    <Page
-                      pageNumber={page}
+          <TransformWrapper
+            defaultScale={1}
+            defaultPositionX={100}
+            defaultPositionY={200}
+          >
+            {({ zoomIn, zoomOut, ...rest }) => (
+              <>
+                <TransformComponent>
+                  <Document
+                    file={pdfData}
+                    onLoadSuccess={handleDocumentLoadSuccess}
+                  >
+                    <HTMLFlipBook
+                      className={classes.book}
                       width={500}
-                      renderTextLayer={false}
-                    />
-                  </div>
-                ))}
-            </HTMLFlipBook>
-          </Document>
-          <div className={classes.buttonBoard}>
-            <button
-              onClick={() => flipbook.current.pageFlip().flipPrev()}
-              className={classes.button}
-            >
-              <span class="material-symbols-outlined">navigate_before</span>
-            </button>
-            <button
-              onClick={() => flipbook.current.pageFlip().flipNext()}
-              className={classes.button}
-            >
-              <span class="material-symbols-outlined">zoom_out</span>
-            </button>
-            <button
-              onClick={() => flipbook.current.pageFlip().flipNext()}
-              className={classes.button}
-            >
-              <span class="material-symbols-outlined">zoom_in</span>
-            </button>
-            <button
-              onClick={() => flipbook.current.pageFlip().flipNext()}
-              className={classes.button}
-            >
-              <span class="material-symbols-outlined">navigate_next</span>
-            </button>
-          </div>
+                      ref={flipbook}
+                      height={700}
+                      showCover={true}
+                      autoSize={true}
+                    >
+                      {pageIds &&
+                        pageIds.map((page) => (
+                          <div key={page} className={classes.demoPage}>
+                            <Page
+                              pageNumber={page}
+                              width={500}
+                              renderTextLayer={false}
+                            />
+                          </div>
+                        ))}
+                    </HTMLFlipBook>
+                  </Document>
+                </TransformComponent>
+                <div className={classes.buttonBoard}>
+                  <button
+                    onClick={() => flipbook.current.pageFlip().flipPrev()}
+                    className={classes.button}
+                  >
+                    <span class="material-symbols-outlined">
+                      navigate_before
+                    </span>
+                  </button>
+                  <button onClick={() => zoomOut()} className={classes.button}>
+                    <span class="material-symbols-outlined">zoom_out</span>
+                  </button>
+                  <button onClick={() => zoomIn()} className={classes.button}>
+                    <span class="material-symbols-outlined">zoom_in</span>
+                  </button>
+                  <button
+                    onClick={() => flipbook.current.pageFlip().flipNext()}
+                    className={classes.button}
+                  >
+                    <span class="material-symbols-outlined">navigate_next</span>
+                  </button>
+                </div>
+              </>
+            )}
+          </TransformWrapper>
         </div>
       ) : (
         "Loading..."
