@@ -36,7 +36,6 @@ const NewspaperView = () => {
       console.log(magazineData);
 
       // setpageNumbers(pageIds);
-      // console.log(pageNumbers);
 
       return response.data;
     };
@@ -76,6 +75,7 @@ const NewspaperView = () => {
                       height={700}
                       showCover={true}
                       autoSize={true}
+                      useMouseEvents={false}
                     >
                       {pageIds &&
                         pageIds.map((page) => (
