@@ -36,7 +36,6 @@ const NewspaperView = () => {
       console.log(magazineData);
 
       // setpageNumbers(pageIds);
-      // console.log(pageNumbers);
 
       return response.data;
     };
