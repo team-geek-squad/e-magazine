@@ -30,7 +30,7 @@ const NewspaperView = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "http://localhost:8080/magazine/get-latest"
+        "https://mag-backend2.onrender.com/magazine/get-latest"
       );
       setmagazineData(response.data);
       console.log(magazineData);
