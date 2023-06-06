@@ -13,7 +13,12 @@
   position: relative;
 }
 
+.viewSection2 {
+  display: block;
+}
+
 .demoPage {
+  padding: 0 0.5rem;
   /* background-color: white;
   border: 1px solid black;
   display: flex;

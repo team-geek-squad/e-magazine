@@ -55,7 +55,11 @@ const NewspaperView = () => {
     <div>
       <p className={classes.tagline}>Read the latest Rathnadeepa Online</p>
       {pdfData ? (
-        <div className={classes.viewSection}>
+        <Document
+          file={pdfData}
+          onLoadSuccess={handleDocumentLoadSuccess}
+        >
+        {/* <div className={classes.viewSection2}>
           <TransformWrapper
             defaultScale={1}
             defaultPositionX={100}
@@ -63,11 +67,8 @@ const NewspaperView = () => {
           >
             {({ zoomIn, zoomOut, ...rest }) => (
               <>
-                <TransformComponent>
-                  <Document
-                    file={pdfData}
-                    onLoadSuccess={handleDocumentLoadSuccess}
-                  >
+                <TransformComponent> */}
+                <div className={classes.viewSection}>
                     <HTMLFlipBook
                       className={classes.book}
                       width={500}
@@ -75,21 +76,26 @@ const NewspaperView = () => {
                       height={700}
                       showCover={true}
                       autoSize={true}
-                      useMouseEvents={false}
+                      // useMouseEvents={false}
                     >
                       {pageIds &&
                         pageIds.map((page) => (
                           <div key={page} className={classes.demoPage}>
-                            <Page
+                            <TransformWrapper>
+                              <TransformComponent>
+                              <Page
                               pageNumber={page}
                               width={500}
                               renderTextLayer={false}
                             />
+                              </TransformComponent>
+                            </TransformWrapper>
+                            
                           </div>
                         ))}
                     </HTMLFlipBook>
-                  </Document>
-                </TransformComponent>
+                    </div>
+                {/* </TransformComponent>
                 <div className={classes.buttonBoard}>
                   <button
                     onClick={() => flipbook.current.pageFlip().flipPrev()}
@@ -114,8 +120,10 @@ const NewspaperView = () => {
                 </div>
               </>
             )}
-          </TransformWrapper>
-        </div>
+          </TransformWrapper> */}
+        {/* </div> */}
+        </Document>
+
       ) : (
         "Loading..."
       )}
