@@ -4,8 +4,8 @@ const YoutubeVideos = ({ embedId }) => {
   return (
     <div className={classes.videoDiv}>
       <iframe
-        width="250"
-        height="150"
+        width="330"
+        height="200"
         src={`https://www.youtube.com/embed/${embedId}`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -13,33 +13,40 @@
   position: relative;
 }
 
-.viewSection2 {
-  display: block;
+.page {
+  position: relative;
 }
 
-.demoPage {
-  padding: 0 0.5rem;
-  /* background-color: white;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: min-content; */
-}
-
-.buttonBoard {
+.zoomButtonBoard {
   position: absolute;
-  bottom: 10%;
+  bottom: 5%;
   left: 50%;
   transform: translate(-50%, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  background-color: black;
+  opacity: 80%;
+}
+
+.zoomIcons {
+  color: white;
+}
+
+.resetText {
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.buttonBoard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
   background-color: #d9d9d9;
-  /* border: 2px solid black; */
-  box-shadow: 5px 5px 10px gray;
 }
 
 .button {
@@ -51,4 +58,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.pageFlipBtnText {
+  margin-bottom: 0;
+  /* font-weight: bold; */
+  text-transform: uppercase;
 }
