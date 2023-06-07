@@ -18,7 +18,7 @@ const NewspaperView = () => {
   const [numPages, setNumPages] = useState(null);
   const [pdfData, setPdfData] = useState(null);
   const [magazineData, setmagazineData] = useState(null);
-  // const [pageNumbers, setpageNumbers] = useState([]);
+  const [flipToPage, setFlipToPage] = useState(0);
   const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map((i) => i + 1);
 
   const flipbook = useRef();
@@ -127,6 +127,25 @@ const NewspaperView = () => {
               <span class="material-symbols-outlined">navigate_before</span>
               <p className={classes.pageFlipBtnText}>previous page</p>
             </button>
+            <div className={classes.flipToPageDiv}>
+              <input
+                type="number"
+                onChange={(e) => setFlipToPage(e.target.value)}
+                className={classes.flipToPageInput}
+                min="1"
+                max={numPages}
+              />
+              <p className={classes.flipToPageText}>/ {numPages}</p>
+              <button
+                className={classes.flipToPageBtn}
+                onClick={() => {
+                  flipbook.current.pageFlip().flip(flipToPage, "top");
+                  console.log("runing", flipToPage);
+                }}
+              >
+                <p className={classes.flipToPageBtnText}>flip</p>
+              </button>
+            </div>
             <button
               onClick={() => flipbook.current.pageFlip().flipNext()}
               className={classes.button}

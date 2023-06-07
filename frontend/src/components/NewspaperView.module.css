@@ -49,6 +49,32 @@
   background-color: #d9d9d9;
 }
 
+.flipToPageDiv {
+  display: flex;
+  align-items: center;
+}
+
+.flipToPageInput {
+  width: 50px;
+}
+
+.flipToPageText {
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+
+.flipToPageBtn {
+  margin-left: 10px;
+  background-color: transparent;
+  outline: none;
+  padding: 0 5px;
+}
+
+.flipToPageBtnText {
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
 .button {
   border: none;
   outline: none;
@@ -61,7 +87,14 @@
 }
 
 .pageFlipBtnText {
+  display: block;
   margin-bottom: 0;
   /* font-weight: bold; */
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  .pageFlipBtnText {
+    display: none;
+  }
 }
