@@ -1,18 +1,25 @@
 .horizontalAd {
   width: 100%;
-  /* aspect-ratio: 15 / 1; */
-  background-color: #d9d9d9;
+  aspect-ratio: 15 / 1;
+  background-image: url("../assets/img_1500_100.png");
   margin: 10px 0;
+  background-size: cover;
 }
 
-/* @media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
   .horizontalAd {
     aspect-ratio: 10 / 1;
+    background-image: url("../assets/img_1000_100.png");
   }
 }
 
 @media screen and (max-width: 576px) {
   .horizontalAd {
     aspect-ratio: 6 / 1;
+    background-image: url("../assets/img_600_100.png");
   }
-} */
+}
+
+.adImage {
+  width: 100%;
+}

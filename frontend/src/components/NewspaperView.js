@@ -50,6 +50,16 @@ const NewspaperView = () => {
     setNumPages(numPages);
   };
 
+  // const screenWidth = window.innerWidth;
+
+  // useEffect(() => {
+  //   const printWidth = () => {
+  //     console.log(screenWidth);
+  //   };
+
+  //   printWidth();
+  // }, [screenWidth]);
+
   return (
     <div className={classes.newspaperView}>
       <p className={classes.tagline}>Read the latest Rathnadeepa Online</p>

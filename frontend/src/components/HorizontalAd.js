@@ -1,9 +1,11 @@
+// import img1500_100 from "../assets/img_1500_100.png";
+
 import classes from "./HorizontalAd.module.css";
 
 const HorizontalAd = () => {
   return (
     <div className={classes.horizontalAd}>
-      <img src="#" alt="advertisement" className={classes.adImage} />
+      {/* <img src={img1500_100} alt="advertisement" className={classes.adImage} /> */}
     </div>
   );
 };
