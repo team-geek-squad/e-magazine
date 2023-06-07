@@ -39,16 +39,16 @@ const YoutubeVideoCarousel = () => {
     <div className="carouselContainer container">
       <div className="controls">
         <span
-          class="material-symbols-outlined prevIcon"
+          class="material-symbols-outlined prevIcon controlIcons"
           onClick={sliderRef?.slickPrev}
         >
-          arrow_back_ios
+          arrow_circle_left
         </span>
         <span
-          class="material-symbols-outlined nextIcon"
+          class="material-symbols-outlined nextIcon controlIcons"
           onClick={sliderRef?.slickNext}
         >
-          arrow_forward_ios
+          arrow_circle_right
         </span>
       </div>
       <Slider ref={setSliderRef} {...settings}>

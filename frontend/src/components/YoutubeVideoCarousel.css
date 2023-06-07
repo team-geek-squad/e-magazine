@@ -3,6 +3,11 @@
   position: relative;
 }
 
+.controlIcons {
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48;
+  transform: scale(1.5);
+}
+
 .prevIcon {
   position: absolute;
   top: 50%;
@@ -19,4 +24,5 @@
 
 .slick-dots {
   bottom: -50px;
+  transform: scale(2);
 }
