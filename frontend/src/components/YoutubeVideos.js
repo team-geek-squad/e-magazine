@@ -4,7 +4,7 @@ const YoutubeVideos = ({ embedId }) => {
   return (
     <div className={classes.videoDiv}>
       <iframe
-        width="330"
+        width="280"
         height="200"
         src={`https://www.youtube.com/embed/${embedId}`}
         frameBorder="0"
