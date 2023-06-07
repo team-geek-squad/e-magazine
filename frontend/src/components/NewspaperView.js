@@ -76,7 +76,7 @@ const NewspaperView = () => {
                       height={700}
                       showCover={true}
                       autoSize={true}
-                      // useMouseEvents={false}
+                      useMouseEvents={false}
                     >
                       {pageIds &&
                         pageIds.map((page) => (
@@ -95,7 +95,7 @@ const NewspaperView = () => {
                         ))}
                     </HTMLFlipBook>
                     </div>
-                {/* </TransformComponent>
+                {/* </TransformComponent> */}
                 <div className={classes.buttonBoard}>
                   <button
                     onClick={() => flipbook.current.pageFlip().flipPrev()}
@@ -105,12 +105,12 @@ const NewspaperView = () => {
                       navigate_before
                     </span>
                   </button>
-                  <button onClick={() => zoomOut()} className={classes.button}>
+                  {/* <button onClick={() => zoomOut()} className={classes.button}>
                     <span class="material-symbols-outlined">zoom_out</span>
                   </button>
                   <button onClick={() => zoomIn()} className={classes.button}>
                     <span class="material-symbols-outlined">zoom_in</span>
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => flipbook.current.pageFlip().flipNext()}
                     className={classes.button}
@@ -118,10 +118,10 @@ const NewspaperView = () => {
                     <span class="material-symbols-outlined">navigate_next</span>
                   </button>
                 </div>
-              </>
-            )}
-          </TransformWrapper> */}
-        {/* </div> */}
+              {/* </> */}
+            {/* )} */}
+          {/* // </TransformWrapper> */}
+        // {/* </div> */}
         </Document>
 
       ) : (
