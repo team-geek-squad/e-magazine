@@ -196,7 +196,11 @@ const NewspaperView = () => {
           </div>
         </Document>
       ) : (
-        "Loading..."
+        <div className={classes.loadingPlaceholder}>
+          <div class={`spinner-border ${classes.spinner}`} role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
       )}
     </div>
   );

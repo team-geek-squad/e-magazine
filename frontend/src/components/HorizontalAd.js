@@ -2,7 +2,7 @@
 
 import classes from "./HorizontalAd.module.css";
 
-const HorizontalAd = () => {
+const HorizontalAd = ({placement}) => {
   return (
     <div className={classes.horizontalAd}>
       {/* <img src={img1500_100} alt="advertisement" className={classes.adImage} /> */}
