@@ -10,13 +10,13 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const NewspaperView = () => {
-  const pageWidth = 450;
-  const pageHeight = pageWidth * 1.414;
+  // const pageWidth = 450;
+  // const pageHeight = pageWidth * 1.414;
 
   const [numPages, setNumPages] = useState(null);
   const [pdfData, setPdfData] = useState(null);
   const [magazineData, setmagazineData] = useState(null);
-  const [flipToPage, setFlipToPage] = useState(0);
+  const [windowSize, setWindowSize] = useState(getWindowSize());
   const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map((i) => i + 1);
 
   const flipbook = useRef();
@@ -50,27 +50,53 @@ const NewspaperView = () => {
     setNumPages(numPages);
   };
 
-  // const screenWidth = window.innerWidth;
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
 
-  // useEffect(() => {
-  //   const printWidth = () => {
-  //     console.log(screenWidth);
-  //   };
+    window.addEventListener("resize", handleWindowResize);
 
-  //   printWidth();
-  // }, [screenWidth]);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
+  function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  }
+
+  const getPageWidth = () => {
+    if (windowSize.innerWidth > 991) {
+      return 400;
+    } else {
+      return windowSize.innerWidth * 0.5;
+    }
+  };
+
+  const getPageHeight = () => {
+    if (windowSize.innerWidth > 991) {
+      return 400 * 1.414;
+    } else {
+      return windowSize.innerWidth * 0.5 * 1.414;
+    }
+  };
 
   return (
     <div className={classes.newspaperView}>
-      <p className={classes.tagline}>Read the latest Rathnadeepa Online</p>
+      <p className={classes.tagline}>
+        Read the latest Rathnadeepa Online width{getPageWidth()} height
+        {getPageHeight()}
+      </p>
       {pdfData ? (
         <Document file={pdfData} onLoadSuccess={handleDocumentLoadSuccess}>
           <div className={classes.viewSection}>
             <HTMLFlipBook
               className={classes.book}
-              width={pageWidth}
+              width={getPageWidth()}
               ref={flipbook}
-              height={pageHeight}
+              height={getPageHeight()}
               showCover={true}
               autoSize={true}
               useMouseEvents={false}
@@ -85,7 +111,7 @@ const NewspaperView = () => {
                             <div className={classes.page}>
                               <Page
                                 pageNumber={page}
-                                width={pageWidth}
+                                width={getPageWidth()}
                                 renderTextLayer={false}
                               />
                             </div>
