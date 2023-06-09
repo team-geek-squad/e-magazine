@@ -16,7 +16,10 @@ const NewspaperView = () => {
   const [numPages, setNumPages] = useState(null);
   const [pdfData, setPdfData] = useState(null);
   const [magazineData, setmagazineData] = useState(null);
+<<<<<<< HEAD
   const [windowSize, setWindowSize] = useState(getWindowSize());
+=======
+>>>>>>> main
   const pageIds = Array.from(Array(numPages - 1 + 1).keys()).map((i) => i + 1);
 
   const flipbook = useRef();
@@ -158,6 +161,7 @@ const NewspaperView = () => {
               onClick={() => flipbook.current.pageFlip().flipPrev()}
               className={`${classes.button} ${classes.prevButton}`}
             >
+<<<<<<< HEAD
               <span class={`material-symbols-outlined ${classes.flipPageIcon}`}>
                 navigate_before
               </span>
@@ -173,6 +177,81 @@ const NewspaperView = () => {
               </span>
             </button>
           </div>
+=======
+              {pageIds &&
+                pageIds.map((page) => (
+                  <div key={page} className={classes.pageContainer}>
+                    <TransformWrapper>
+                      {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                        <>
+                          <TransformComponent>
+                            <div className={classes.page}>
+                              <Page
+                                pageNumber={page}
+                                width={pageWidth}
+                                renderTextLayer={false}
+                              />
+                            </div>
+                          </TransformComponent>
+                          <div className={classes.zoomButtonBoard}>
+                            <button
+                              onClick={() => zoomOut()}
+                              className={classes.button}
+                            >
+                              <span
+                                class={`material-symbols-outlined ${classes.zoomIcons}`}
+                              >
+                                zoom_out
+                              </span>
+                            </button>
+                            <button
+                              onClick={() => resetTransform()}
+                              className={classes.button}
+                            >
+                              <p className={classes.resetText}>reset</p>
+                            </button>
+                            <button
+                              onClick={() => zoomIn()}
+                              className={classes.button}
+                            >
+                              <span
+                                class={`material-symbols-outlined ${classes.zoomIcons}`}
+                              >
+                                zoom_in
+                              </span>
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </TransformWrapper>
+                  </div>
+                ))}
+            </HTMLFlipBook>
+            <div className={classes.buttonBoard}>
+              <button
+                onClick={() => flipbook.current.pageFlip().flipPrev()}
+                className={`${classes.button} ${classes.prevButton}`}
+              >
+                <span
+                  class={`material-symbols-outlined ${classes.flipPageIcon}`}
+                >
+                  navigate_before
+                </span>
+                <p className={classes.pageFlipBtnText}>previous page</p>
+              </button>
+              <button
+                onClick={() => flipbook.current.pageFlip().flipNext()}
+                className={`${classes.button} ${classes.nextButton}`}
+              >
+                <p className={classes.pageFlipBtnText}>next page</p>
+                <span
+                  class={`material-symbols-outlined ${classes.flipPageIcon}`}
+                >
+                  navigate_next
+                </span>
+              </button>
+            </div>
+>>>>>>> main
           </div>
         </Document>
       ) : (
