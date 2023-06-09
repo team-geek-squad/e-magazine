@@ -1,5 +1,6 @@
 .newspaperView {
   margin-bottom: 30px;
+  /* position: relative; */
 }
 
 .tagline {
@@ -9,21 +10,16 @@
 }
 
 .viewSection {
-  width: 100%;
-  height: max-content;
-  min-width: 636px;
+  /* width: 100%; */
+  /* height: max-content; */
   background-color: #d9d9d9;
   display: flex;
   justify-content: center;
   position: relative;
 }
 
-/* .pageContainer {
-  position: relative;
-} */
-
-.page {
-  position: relative;
+.book{
+  /* margin: 0 auto; */
 }
 
 .zoomButtonBoard {
@@ -74,38 +70,10 @@
   height: 7rem;
 }
 
-/* .flipToPageDiv {
-  display: flex;
-  align-items: center;
-}
-
-.flipToPageInput {
-  width: 50px;
-}
-
-.flipToPageText {
-  margin-bottom: 0;
-  margin-left: 10px;
-}
-
-.flipToPageBtn {
-  margin-left: 10px;
-  background-color: transparent;
-  outline: none;
-  padding: 0 5px;
-}
-
-.flipToPageBtnText {
-  margin-bottom: 0;
-  text-transform: uppercase;
-} */
-
 .button {
   border: none;
   outline: none;
   background-color: transparent;
-  /* margin: 0 10px;
-  padding: 0; */
   display: flex;
   justify-content: center;
   align-items: center;

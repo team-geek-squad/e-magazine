@@ -70,129 +70,109 @@ const NewspaperView = () => {
   const getPageWidth = () => {
     if (windowSize.innerWidth > 991) {
       return 400;
+    } else if (windowSize.innerWidth > 767) {
+      return 650;
+    } else if (windowSize.innerWidth > 576) {
+      return 500;
     } else {
-      return windowSize.innerWidth * 0.5;
+      return windowSize.innerWidth * 0.9;
     }
   };
 
   const getPageHeight = () => {
     if (windowSize.innerWidth > 991) {
       return 400 * 1.414;
+    } else if (windowSize.innerWidth > 767) {
+      return 650 * 1.414;
+    } else if (windowSize.innerWidth > 576) {
+      return 500 * 1.414;
     } else {
-      return windowSize.innerWidth * 0.5 * 1.414;
+      return windowSize.innerWidth * 0.9 * 1.414;
     }
   };
 
   return (
     <div className={classes.newspaperView}>
-      <p className={classes.tagline}>
-        Read the latest Rathnadeepa Online width{getPageWidth()} height
-        {getPageHeight()}
-      </p>
+      <p className={classes.tagline}>Read the latest Rathnadeepa Online</p>
       {pdfData ? (
         <Document file={pdfData} onLoadSuccess={handleDocumentLoadSuccess}>
           <div className={classes.viewSection}>
-            <HTMLFlipBook
-              className={classes.book}
-              width={getPageWidth()}
-              ref={flipbook}
-              height={getPageHeight()}
-              showCover={true}
-              autoSize={true}
-              useMouseEvents={false}
+          <HTMLFlipBook
+            className={classes.book}
+            width={getPageWidth()}
+            ref={flipbook}
+            height={getPageHeight()}
+            showCover={true}
+            autoSize={true}
+            useMouseEvents={false}
+          >
+            {pageIds &&
+              pageIds.map((page) => (
+                <div key={page} className={classes.pageContainer}>
+                  <TransformWrapper>
+                    {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                      <>
+                        <TransformComponent>
+                          <Page
+                            pageNumber={page}
+                            width={getPageWidth()}
+                            renderTextLayer={false}
+                          />
+                        </TransformComponent>
+                        <div className={classes.zoomButtonBoard}>
+                          <button
+                            onClick={() => zoomOut()}
+                            className={classes.button}
+                          >
+                            <span
+                              class={`material-symbols-outlined ${classes.zoomIcons}`}
+                            >
+                              zoom_out
+                            </span>
+                          </button>
+                          <button
+                            onClick={() => resetTransform()}
+                            className={classes.button}
+                          >
+                            <p className={classes.resetText}>reset</p>
+                          </button>
+                          <button
+                            onClick={() => zoomIn()}
+                            className={classes.button}
+                          >
+                            <span
+                              class={`material-symbols-outlined ${classes.zoomIcons}`}
+                            >
+                              zoom_in
+                            </span>
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </TransformWrapper>
+                </div>
+              ))}
+          </HTMLFlipBook>
+          <div className={classes.buttonBoard}>
+            <button
+              onClick={() => flipbook.current.pageFlip().flipPrev()}
+              className={`${classes.button} ${classes.prevButton}`}
             >
-              {pageIds &&
-                pageIds.map((page) => (
-                  <div key={page} className={classes.pageContainer}>
-                    <TransformWrapper>
-                      {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                        <>
-                          <TransformComponent>
-                            <div className={classes.page}>
-                              <Page
-                                pageNumber={page}
-                                width={getPageWidth()}
-                                renderTextLayer={false}
-                              />
-                            </div>
-                          </TransformComponent>
-                          <div className={classes.zoomButtonBoard}>
-                            <button
-                              onClick={() => zoomOut()}
-                              className={classes.button}
-                            >
-                              <span
-                                class={`material-symbols-outlined ${classes.zoomIcons}`}
-                              >
-                                zoom_out
-                              </span>
-                            </button>
-                            <button
-                              onClick={() => resetTransform()}
-                              className={classes.button}
-                            >
-                              <p className={classes.resetText}>reset</p>
-                            </button>
-                            <button
-                              onClick={() => zoomIn()}
-                              className={classes.button}
-                            >
-                              <span
-                                class={`material-symbols-outlined ${classes.zoomIcons}`}
-                              >
-                                zoom_in
-                              </span>
-                            </button>
-                          </div>
-                        </>
-                      )}
-                    </TransformWrapper>
-                  </div>
-                ))}
-            </HTMLFlipBook>
-            <div className={classes.buttonBoard}>
-              <button
-                onClick={() => flipbook.current.pageFlip().flipPrev()}
-                className={`${classes.button} ${classes.prevButton}`}
-              >
-                <span
-                  class={`material-symbols-outlined ${classes.flipPageIcon}`}
-                >
-                  navigate_before
-                </span>
-                <p className={classes.pageFlipBtnText}>previous page</p>
-              </button>
-              {/* <div className={classes.flipToPageDiv}>
-              <input
-                type="number"
-                onChange={(e) => setFlipToPage(e.target.value)}
-                className={classes.flipToPageInput}
-                min="1"
-                max={numPages}
-              />
-              <p className={classes.flipToPageText}>/ {numPages}</p>
-              <button
-                className={classes.flipToPageBtn}
-                onClick={() => {
-                  flipbook.current.pageFlip().flip(flipToPage, "top");
-                  console.log("runing", flipToPage);
-                }}
-              >
-                <p className={classes.flipToPageBtnText}>flip</p>
-              </button>
-            </div> */}
-              <button
-                onClick={() => flipbook.current.pageFlip().flipNext()}
-                className={`${classes.button} ${classes.nextButton}`}
-              >
-                <p className={classes.pageFlipBtnText}>next page</p>
-                <span
-                  class={`material-symbols-outlined ${classes.flipPageIcon}`}
-                >
-                  navigate_next
-                </span>
-              </button>
-            </div>
+              <span class={`material-symbols-outlined ${classes.flipPageIcon}`}>
+                navigate_before
+              </span>
+              <p className={classes.pageFlipBtnText}>previous page</p>
+            </button>
+            <button
+              onClick={() => flipbook.current.pageFlip().flipNext()}
+              className={`${classes.button} ${classes.nextButton}`}
+            >
+              <p className={classes.pageFlipBtnText}>next page</p>
+              <span class={`material-symbols-outlined ${classes.flipPageIcon}`}>
+                navigate_next
+              </span>
+            </button>
+          </div>
           </div>
         </Document>
       ) : (
